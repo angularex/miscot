@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring</title>
+    <script>
+        var hero = {
+            title : "Ironman",
+            power : 5,
+            firstname : "Tony",
+            lastname : "Stark",
+            city : "New York"
+        };
+/* 
+        var avenger = hero;
+
+        console.log(avenger.title);// ???
+        console.log(hero.title);// ???
+        avenger.power = 10;
+        console.log(avenger.power);// ???
+        console.log(hero.power);// ???
+ */
+        // DESTRUCTURING in ES3
+        /* 
+        var avengerTitle = hero.title;
+        var avengerPower = hero.power;
+        var avengerFirstname = hero.firstname;
+        var avengerLastname = hero.lastname;
+        var avengerCity = hero.city; 
+        */
+       
+       // DESTRUCTURING in ES3
+        /* 
+        var avengerTitle = hero.title, 
+            avengerPower = hero.power, 
+            avengerFirstname = hero.firstname, 
+            avengerLastname = hero.lastname, 
+            avengerCity = hero.city;
+        */
+
+        // DESTRUCTURING in ES5
+        var { 
+            title : avengerTitle, 
+            power : avengerPower, 
+            firstname : avengerFirstname, 
+            lastname : avengerLastname, 
+            city : avengerCity } = hero;
+
+        console.log(avengerPower);// 5
+        avengerPower = 10;
+        console.log(avengerPower);// 10
+        console.log(hero.power);// 5
+    
+    var avengers = ["Ironman", "Hulk", "Thor"];
+    let [firsthero, secondhero, thirdhero] = avengers;
+    console.log(firsthero);/// ???
+    console.log(secondhero);/// ???
+    console.log(thirdhero);/// ???
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
