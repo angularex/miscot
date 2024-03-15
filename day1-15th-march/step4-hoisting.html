@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting</title>
+    <script>
+        if(user in window){
+            console.log("user is found current value is ", user);
+        }else{
+            console.log("user is not found");
+        }
+        // console.log(guest);// undefined
+        var user = "Vijay";
+        // console.log(guest);// Vijay
+        /* 
+            var user = undefined;
+                user = "Vijay";
+
+        */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

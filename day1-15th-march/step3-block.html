@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Scope</title>
+    <script>
+        var hero = {
+            title : "Ironman",
+            power : 7
+        };
+        
+        for(var i = 0; i < 99; i++){
+            console.log(i);
+        };
+        console.log("******************************");
+        console.log(i);
+        console.log("******************************");
+
+        // object
+        function checkPowerAndChangeTitle(){
+            var tempTitle = undefined;
+            // var i = "not your value";
+            if(hero.power > 6){
+                tempTitle = hero.title;
+                hero.title = tempTitle+" is strong";
+            }
+            console.log(tempTitle);// ????
+            // console.log(i);
+        };
+        checkPowerAndChangeTitle();
+        console.log(hero.title);// ????
+        // console.log(tempTitle);// 
+
+        // console.log(hero.title.toUpperCase());
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
