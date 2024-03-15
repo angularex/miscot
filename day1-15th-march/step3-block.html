@@ -9,20 +9,23 @@
             title : "Ironman",
             power : 7
         };
-        
-        for(var i = 0; i < 99; i++){
+        /* 
+        var hoisting
+        let TDZ
+        const TDZ
+        */
+        for(let i = 0; i < 99; i++){
             console.log(i);
         };
         console.log("******************************");
-        console.log(i);
+        // console.log(i);
         console.log("******************************");
 
         // object
         function checkPowerAndChangeTitle(){
-            var tempTitle = undefined;
             // var i = "not your value";
             if(hero.power > 6){
-                tempTitle = hero.title;
+                let tempTitle = hero.title;
                 hero.title = tempTitle+" is strong";
             }
             console.log(tempTitle);// ????

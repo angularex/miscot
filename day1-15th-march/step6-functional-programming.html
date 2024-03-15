@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+    <script>
+        /* 
+        function adder(num1, num2){
+            return num1 + num2;
+        }; 
+        */
+        // ES3
+        /* 
+        function adder(num1, num2){
+            var first = num1 || 0;
+            var second = num2 || 0;
+            return first + second;
+        };
+        */
+        // default parameters
+        /* 
+        function adder(num1 = 0, num2 = 0){
+            return num1 + num2;
+        };
+        */
+
+        // console.log(adder(5,6));// 11
+        // console.log(adder("5","6"));// 11
+        // console.log(adder(undefined,null));// 11
+        // console.log(adder(5));// ??? Not a Number
+
+        // function name(params){ body  return };
+        // optional optional(optional){ undefined };
+
+        // object
+            // properties
+            // methods
+        // ES3
+        /* 
+        function adder(){
+            // return arguments.length;
+            var total = 0;
+            for(let i = 0; i < arguments.length; i++){
+                total += arguments[i]; 
+            };
+            return total;
+        };
+        */
+       // ES5 Rest parameters
+        function adder(...nums){
+            var total = 0;
+            for(let i = 0; i < nums.length; i++){
+                total += nums[i]; 
+            };
+            return total;
+        };
+        // console.log(adder(5)); // NaN
+        // console.log(adder(5,6)); // 11 
+        // console.log(adder(5,6,7)); // ??? 
+        // console.log(adder(5,6,7,8)); // ??? 
+        // console.log(adder(5,6,7,8,9)); // ??? 
+        var vals = [5,6,7,8,9,10];
+        // console.log(adder(vals[0], vals[1], vals[2], vals[3], vals[4], vals[5])); // ??? 
+        // Spread syntax 
+        console.log(adder(...vals)); // 45
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

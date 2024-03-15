@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring with Spread</title>
+    <script>
+        var hero = {
+            title : "Ironman",
+            power : 5,
+            firstname : "Tony",
+            lastname : "Stark",
+            city : "New York"
+        };
+
+       /*  var { 
+            title : avengerTitle, 
+            power : avengerPower, 
+            firstname : avengerFirstname, 
+            lastname : avengerLastname, 
+            movies : {
+                firstmovie : avengerFirstMovie,
+                secondmovie : avengerSecondMovie,
+            },
+            city : avengerCity } = hero;
+
+            console.log(avengerFirstMovie);
+            console.log(avengerSecondMovie); 
+            */
+            /* 
+            var newhero = {...hero};
+            console.log(newhero.title);///??
+            console.log(hero.title);///??
+            newhero.title = "Ironmonger";
+            console.log(newhero.title);///??
+            console.log(hero.title);///?? 
+            */
+            var newhero = JSON.parse(JSON.stringify(hero));
+            console.log(newhero.title);///??
+            console.log(hero.title);///??
+            newhero.title = "Ironmonger";
+            console.log(newhero.title);///??
+            console.log(hero.title);///?? 
+            
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
