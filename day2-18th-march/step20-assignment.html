@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+    <script>
+        var cart = {
+            title : "Cart",
+            getCostPrice : function(){
+                return 100;
+            },
+            getSellingPrice : function(){
+                var computeProfit = function(){
+                    return this.getCostPrice() * 0.2;
+                }
+                return this.getCostPrice()+computeProfit();
+            }
+        };
+        console.log(cart.title);
+        console.log(cart.getCostPrice());
+        console.log(cart.getSellingPrice());// 120 
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
