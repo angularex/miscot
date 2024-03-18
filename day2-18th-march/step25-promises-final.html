@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+    <script>
+       /*  
+        console.log("log from line 8");
+        setTimeout(function(){
+            console.log("log from line 10");
+        },4000)
+        console.log("log from line 12"); 
+        */
+       var promise = new Promise(function(resolve, reject){
+            setTimeout(function(){
+                if(true){
+                    resolve([37,21,24,9,65,6,99,16,18,6,26,11]);
+                }else{
+                    reject("Promise was rejected");
+                }
+            },4000)
+        });
+
+        // promise.then( function(res){ console.log("Response ", res) }) // is called when the promise resolves
+        // promise.catch(function(err){
+        //     console.log("Error ", err);
+        // })// is called when the promise rejected
+        // promise.finally(function(){
+        //     console.log("Promise is now settled");
+        // })// is called after the promise is settled
+        promise
+        .then( function(res){ 
+            document.getElementById("log1").textContent += res;
+            // console.log("Response ", res) 
+            return res;
+        })
+        .then( function(res){ 
+            let vals = res.filter(val => val < 50)
+            document.getElementById("log2").textContent += vals;
+            // console.log("Response ", res) 
+            return vals;
+        })
+        .then( function(res){ 
+            document.getElementById("log3").textContent += res.reduce((initval, val) => initval + val);
+            // console.log("Response ", res) 
+        })
+        .catch(function(err){
+            console.log("Error ", err);
+        })
+        .finally(function(){
+            console.log("Promise is now settled");
+        })
+
+    </script>
+</head>
+<body>
+    <h1 id="log1"></h1>
+    <h1 id="log2"></h1>
+    <h1 id="log3"></h1>
+</body>
+</html>
