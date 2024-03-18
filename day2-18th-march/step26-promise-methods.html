@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let promise1 = function(){
+            return new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    if(true){
+                        resolve("Resolve message from promise1")
+                    }else{
+                        reject("Reject error from promise1")
+                    }
+                },3000)
+            })
+        }
+        let promise2 = function(){
+            return new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    if(true){
+                        resolve("Resolve message from promise2")
+                    }else{
+                        reject("Reject error from promise2")
+                    }
+                },1000)
+            })
+        }
+        let promise3 = function(){
+            return new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    if(false){
+                        resolve("Resolve message from promise3")
+                    }else{
+                        reject("Reject error from promise3")
+                    }
+                },500)
+            })
+        }
+
+        // we want all the promises to resolve 
+        /*
+        Promise.all([promise1(), promise2(), promise3()]).then(
+            function(res){
+                console.log("Result ", res)
+            }
+        ).catch(
+            function(err){
+                console.log("Error ", err)
+            }
+        ).finally(
+            function(){
+                console.log("all promises are settled")
+            }
+        )
+        */
+        // we want any of the promises to resolve 
+        /*
+       
+        Promise.any([promise1(), promise2(), promise3()])
+        .then(
+            function(res){
+                console.log("Result ", res)
+            }
+        ).catch(
+            function(err){
+                console.log("Error ", err)
+            }
+        ).finally(
+            function(){
+                console.log("all promises are settled")
+            }
+        )
+        */
+        // we want all the promises to settle 
+        /*
+        Promise.allSettled([promise1(), promise2(), promise3()])
+        .then(
+            function(res){
+                console.log("Result ", res)
+            }
+        ).catch(
+            function(err){
+                console.log("Error ", err)
+            }
+        ).finally(
+            function(){
+                console.log("all promises are settled")
+            }
+        )
+        */
+        // we want the first promises to either resolve or reject
+        Promise.race([promise1(), promise2(), promise3()])
+        .then(
+            function(res){
+                console.log("Result ", res)
+            }
+        ).catch(
+            function(err){
+                console.log("Error ", err)
+            }
+        ).finally(
+            function(){
+                console.log("all promises are settled")
+            }
+        )
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
