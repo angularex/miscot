@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects</title>
+    <script>
+
+       let hero = Object.create(null);
+       Object.defineProperties(hero,{
+        title : {
+            value : "Batman",
+            writable : true,
+            enumerable : true,
+            configurable : true
+        },
+        accessTitle : {
+            get : function(){  return this.title; },
+            set : function(ntitle){ this.title = ntitle; }
+        },
+        power : { 
+            value : 7, 
+            enumerable : true 
+        }
+       });
+
+       for(let prop in hero){
+           console.log(prop, hero[prop])
+       }; 
+        
+       // hero.title = "Superman";
+       hero.accessTitle = "Superman";// setter
+      
+       console.log(hero.accessTitle);// getter
+       Object.defineProperty(hero,"title",{ writable : false, enumerable : false });
+       hero.title = "Joker";
+       console.log(hero.accessTitle);// getter
+       
+       for(let prop in hero){
+           console.log(prop, hero[prop])
+       }; 
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
