@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+        import { Hero } from "./modules/hero.js";
+        let hero = new Hero("Bruce","Benner","Hulk",['Hulk part 1', 'Hulk part 2'],"I can Jump");
+        console.log(hero.firstname, hero.lastname);
+        console.log(hero.sayname());
+        // console.log(hero.saypower());
+        console.log("Power is ",hero.power);
+        hero.power = 7;
+        console.log("Power is ",hero.power);
+        console.log(Hero.version);
+        console.log(hero.movies);
+        console.log(hero.canmove);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

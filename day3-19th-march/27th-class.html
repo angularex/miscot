@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+    <script>
+        /* 
+        let person = Object.create(null);
+        Object.defineProperty(person,"canwalk",{ value : "Can Walk", enumerable : true });
+        Object.defineProperty(person,"power",{ value : 5, enumerable : true });
+        for(let prop in person){
+            console.log(prop,person[prop]);
+        };
+        let hero = Object.create(person);
+        for(let prop in hero){
+            console.log(prop,hero[prop]);
+        }; 
+        */
+
+        /* 
+        inherit
+        property
+            public
+            private
+                getter
+                setter
+            static
+        method
+            public
+        constructor
+        */
+        class Person{
+            canmove = "Default";
+            movies = [];
+            constructor(ncm, ml){
+                this.canmove = ncm;
+                this.movies = ml;
+            }
+        }
+        class Hero extends Person{
+            // public property
+            firstname = "Default";
+            lastname = "Default";
+            title = "Default";
+            // static property
+            static version = 1001;
+            // private property
+            #power = 5;
+            // constructor
+            constructor(fn,ln,ntitle,ml,ncm){
+                super(ncm, ml)
+                // console.log(this.firstname);
+                // console.log(this.lastname);
+                this.firstname = fn;
+                this.lastname = ln;
+                this.title = ntitle;
+            }
+            // public method
+            sayname(){
+                return this.firstname+" "+this.lastname+" is "+this.title;
+            }
+           /*  
+            saypower(){
+                return this.#power;
+            } 
+            */
+           get power(){
+            return this.#power;
+           }
+           set power(npower){
+            this.#power = npower;
+           }
+        };
+
+        let hero = new Hero("Bruce","Benner","Hulk",['Hulk part 1', 'Hulk part 2'],"I can Jump");
+        console.log(hero.firstname, hero.lastname);
+        console.log(hero.sayname());
+        // console.log(hero.saypower());
+        console.log("Power is ",hero.power);
+        hero.power = 7;
+        console.log("Power is ",hero.power);
+        console.log(Hero.version);
+        console.log(hero.movies);
+        console.log(hero.canmove);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
