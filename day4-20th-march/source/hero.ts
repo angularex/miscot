@@ -1,3 +1,5 @@
+import {Person} from "./person.js";
+
 interface IHero{
     firstname:string;
     lastname:string;
@@ -7,7 +9,7 @@ interface IHero{
     setpower(npower:number):void;
 };
 
-class Hero extends Person implements IHero{
+export class Hero extends Person implements IHero{
     static version:number = 1001;
     constructor(
         public firstname:string,

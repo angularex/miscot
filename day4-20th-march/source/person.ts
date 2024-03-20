@@ -3,6 +3,6 @@ interface IClass{
     movies:string[];
 }
 
-class Person implements IClass{
+export class Person implements IClass{
     constructor(public canmove:string, public movies:string[]){}
 }

@@ -1,6 +1,6 @@
-"use strict";
+import { Person } from "./person.js";
 ;
-class Hero extends Person {
+export class Hero extends Person {
     constructor(firstname, lastname, title, ml, ncm, power) {
         super(ncm, ml);
         this.firstname = firstname;
