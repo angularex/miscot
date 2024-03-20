@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composition</title>
+    <script>
+        function composition(fun1, fun2){
+            return function(arg){
+                return fun1(fun2(arg));
+            }
+        };
+        function firstfun(param1){
+            return param1+param1;
+        };
+        function secondfun(param1){
+            return param1 * param1;
+        };
+
+        // let comp = composition(firstfun, secondfun);
+        // console.log(comp(5));// ????
+
+        // let total = composition(firstfun, secondfun)(5);
+        // console.log(total);// ????
+
+        console.log(composition(firstfun, secondfun)(5));// ?? 
+
+        class CommonMan{
+            title = "Bruce Wayne";
+        };
+
+        let addPower = function(num){
+            return function(targetClass){
+                let inst = new targetClass();
+                return class {
+                    title = inst.title;
+                    power = num;
+                }
+            }
+        };
+
+        /* 
+        let heroInMaking = addPower(7);
+        let Hero = heroInMaking(CommonMan);
+        let hero = new Hero();
+        console.log(hero.title);
+        console.log(hero.power);
+        */
+       
+        CommonMan = addPower(7)(CommonMan);
+        let hero = new CommonMan();
+        console.log(hero.title, hero.power);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
