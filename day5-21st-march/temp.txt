@@ -4,126 +4,26 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
     <h1>Welcome to {{title}}!</h1>
-    <h2>Power is : {{ power }}</h2>
-    <input #ip1 value="{{power}}" (input)="power = ip1.value" type="range">
-    <input [value]="power" (input)="changePower($event)" type="number">
-    <h3 (click)="changeHeader($event)">First Heading</h3>
-    <h3 (click)="changeHeader($event)">Second Heading</h3>
-    <h3 (click)="changeHeader($event)">Third Heading</h3>
-    <h3 (click)="changeHeader($event)">Fourth Heading</h3>
-    <input type="text" [(ngModel)]="message" >
-    <hr>
-    <h3>Child Message : {{ childmessage }}</h3>
-    <hr>
-    <app-child (compEvt)="compEventHandler($event)" [arg1]="power" [arg2]="message" [arg3]="Avengers" [arg4]="JusticeLeague">
-      <p> 
-        First Paragraph
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus omnis eveniet sint, ipsa laudantium ullam porro, ut iure quia, aspernatur neque nulla voluptatum fugit eius! Cumque, molestias! Repellendus, cum consequatur. 
+    Show Terms : 
+    <input (change)="show = !show" [value]="show" type="checkbox">
+    {{ show }}
+    <div *ngIf="show" style="border : 2px solid red; padding : 10px">
+      <h2>Terms and Conditions</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quos nam quae voluptatum iusto, minus, aperiam inventore in sequi, repellendus ex reprehenderit delectus minima odio earum accusantium animi incidunt magnam.
+        Cupiditate laborum obcaecati culpa consequuntur nulla reprehenderit neque, incidunt doloremque dolores dignissimos? Obcaecati, tenetur quisquam. Fugit, iusto perspiciatis, ullam soluta repellat, sit dolore quasi accusantium cupiditate et dolorem dolores exercitationem.
+        Earum reprehenderit doloremque praesentium facere ea et dicta dignissimos libero incidunt perspiciatis, sunt a dolore deserunt eum eaque ratione nobis voluptatum temporibus perferendis voluptas ex pariatur nihil. Velit, numquam hic.
+        Recusandae quos odit in architecto et excepturi impedit enim neque aliquid optio dignissimos quisquam nam, dolore officiis! Ipsa, sit minima fugit quibusdam placeat, architecto, corrupti tempore voluptatem corporis quae dolor?
+        Tenetur, cum. Optio hic eligendi distinctio ea accusantium cupiditate aperiam, commodi blanditiis sunt officiis quidem impedit voluptatem sit cumque, facilis eos officia sequi inventore? Nemo aut odit iusto similique in.
       </p>
-      <p class="second"> 
-        Second Paragraph
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus omnis eveniet sint, ipsa laudantium ullam porro, ut iure quia, aspernatur neque nulla voluptatum fugit eius! Cumque, molestias! Repellendus, cum consequatur. 
-      </p>
-      <button>Click Me</button>
-      <ul>
-        <li>List Item 1</li>
-        <li>List Item 2</li>
-        <li>List Item 3</li>
-        <li>List Item 4</li>
-        <li>List Item 5</li>
-      </ul>
-    </app-child>
+    </div>
   `,
   styles: []
 })
 export class AppComponent {
-  title = 'binding';
-  power:any = 5;
-  childmessage:string = "default child message";
-  message = "Welcome to your life";
-  Avengers = ['Ironman','Hulk','Thor','Black Widow'];
-  JusticeLeague = ['Batman','Superman','Wonder Women'];
+  title = 'Angular Directives';
+  show:boolean = false;
+  list = ['item 1', 'item 2', 'item 3', 'item 4'];
+  power:any = 1;
 
-  changePower(evt:any){
-    alert("power is changed")
-  }
-
-  changeHeader(evt:any){
-    // alert("do you want to change "+evt.target.innerText)
-    evt.target.innerText = "Clicked";
-  }
-
-  compEventHandler(evt:any){
-    // alert("comp event happened");
-    this.childmessage = evt.username+" : "+evt.password;
-  }
-}
-
-
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-
-@Component({
-    selector : "app-child",
-    /* inputs : ['pow','log','list1','list2'], */
-    template : `
-        <div>
-            <h2>Child Component</h2>
-            <h2>Power is : {{ power }}</h2>
-            <input #ip1 [value]="power" (input)="power = ip1.value" type="range">
-            <input [(ngModel)]="power" type="number">
-            <!-- <div class="box">
-                <ng-content select="button"/>
-                <hr>
-                <ng-content select="ul"/>
-                <hr>
-                <ng-content select=".second"/>
-                <hr>
-                <ng-content/>
-            </div -->
-            <div class="player">
-               Power is {{ pow }}
-               <br>
-               Message is {{ log }}
-               <br>
-               <textarea cols="30" rows="2">{{ list1 }}</textarea>
-               <textarea cols="30" rows="2">{{ list2 }}</textarea>
-            </div>
-            User Name : <input #uname [value]="username" type="text">
-            Password :  <input #upass [value]="userpass" type="password">
-            <button (click)="clickHandler(uname.value, upass.value)">Change Title</button>
-        </div>
-    `,
-    styles : `
-        .box{
-            border : 2px solid red;
-            padding : 10px;
-            margin : 10px;
-        }
-        .player{
-            border : 2px dashed blue;
-            padding : 10px;
-            margin : 10px;
-        }
-    `
-})
-export class ChildComp{
-    power:any = 10;
-    username:string = "default title";
-    userpass:string = "default title";
-    @Input('arg1')pow:any = 0;
-    @Input('arg2')log = "default";
-    @Input('arg3')list1 = ['default 1', 'default 2'];
-    @Input('arg4')list2 = ['default 1', 'default 2'];
-    //-------------------------------------------------
-    @Output()compEvt:EventEmitter<any> = new EventEmitter();
-    //-------------------------------------------------
-
-    clickHandler(arg1:any, arg2:any){
-        // alert("you clicked the button");
-        this.compEvt.emit({username : arg1, password : arg2});
-    }
 }
