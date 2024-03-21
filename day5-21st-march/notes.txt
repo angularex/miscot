@@ -1,0 +1,9 @@
+ ng g application binding --ssr=false --style="css" -s -t -S --standalone=false --routing=false 
+
+--ssr=false 		No Serverside Rendering
+--style="css" 		Use CSS for styling
+-s			use inline styles
+-t 			use inline templates
+-S			do not generate test files
+--standalone=false	dont make components as standalone use modules to link components
+--routing=false		do not use routing feature
