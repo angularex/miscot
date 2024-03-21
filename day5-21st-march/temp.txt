@@ -1,0 +1,97 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <h1>Welcome to {{title}}!</h1>
+    <h2>Power is : {{ power }}</h2>
+    <input #ip1 value="{{power}}" (input)="power = ip1.value" type="range">
+    <input #ip2 [value]="power" (input)="power = ip2.value" type="number">
+    <input type="text" [(ngModel)]="message" >
+    <hr>
+    <app-child [pow]="power" [log]="message" [list1]="Avengers" [list2]="JusticeLeague">
+      <p> 
+        First Paragraph
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus omnis eveniet sint, ipsa laudantium ullam porro, ut iure quia, aspernatur neque nulla voluptatum fugit eius! Cumque, molestias! Repellendus, cum consequatur. 
+      </p>
+      <p class="second"> 
+        Second Paragraph
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus omnis eveniet sint, ipsa laudantium ullam porro, ut iure quia, aspernatur neque nulla voluptatum fugit eius! Cumque, molestias! Repellendus, cum consequatur. 
+      </p>
+      <button>Click Me</button>
+      <ul>
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+        <li>List Item 3</li>
+        <li>List Item 4</li>
+        <li>List Item 5</li>
+      </ul>
+    </app-child>
+  `,
+  styles: []
+})
+export class AppComponent {
+  title = 'binding';
+  power:any = 5;
+  message = "Welcome to your life";
+  Avengers = ['Ironman','Hulk','Thor','Black Widow'];
+  JusticeLeague = ['Batman','Superman','Wonder Women'];
+}
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+import { Component } from "@angular/core";
+
+@Component({
+    selector : "app-child",
+    inputs : ['pow','log','list1','list2'],
+    template : `
+        <div>
+            <h2>Child Component</h2>
+            <h2>Power is : {{ power }}</h2>
+            <input #ip1 [value]="power" (input)="power = ip1.value" type="range">
+            <input [(ngModel)]="power" type="number">
+            <div class="box">
+                <ng-content select="button"/>
+                <hr>
+                <ng-content select="ul"/>
+                <hr>
+                <ng-content select=".second"/>
+                <hr>
+                <ng-content/>
+            </div>
+            <div class="player">
+               Power is {{ pow }}
+               <br>
+               Message is {{ log }}
+               <br>
+               <textarea name="" id="" cols="30" rows="10">{{ list1 }}</textarea>
+               <textarea name="" id="" cols="30" rows="10">{{ list2 }}</textarea>
+            </div>
+        </div>
+    `,
+    styles : `
+        .box{
+            border : 2px solid red;
+            padding : 10px;
+            margin : 10px;
+        }
+        .player{
+            border : 2px dashed blue;
+            padding : 10px;
+            margin : 10px;
+        }
+    `
+})
+export class ChildComp{
+    power:any = 10;
+    pow:any = 0;
+    log = "default";
+    list1 = ['default 1', 'default 2'];
+    list2 = ['default 1', 'default 2'];
+}
