@@ -55,23 +55,54 @@ import { Component } from '@angular/core';
   <input #pow type="range" min="0" max="5" step="1" value="power" (input)="power = pow.value">
   Power is {{ power }} 
   <div [ngSwitch]="power">
-      <article *ngSwitchCase="1" >Needs Rest</article>
-      <article *ngSwitchCase="2" >Recovered</article>
-      <article *ngSwitchCase="3" >Low Power</article>
-      <article *ngSwitchCase="4" >Strong</article>
-      <article *ngSwitchCase="5" >Unbeatable</article>
+      <article *ngSwitchCase="'1'" >Needs Rest</article>
+      <article *ngSwitchCase="'2'" >Recovered</article>
+      <article *ngSwitchCase="'3'" >Low Power</article>
+      <article *ngSwitchCase="'4'" >Strong</article>
+      <article *ngSwitchCase="'5'" >Unbeatable</article>
       <article *ngSwitchDefault >Not Ready to Fight</article>
     </div>
   <div [ngSwitch]="power">
-      <article *ngSwitchCase="1" >*</article>
-      <article *ngSwitchCase="2" >**</article>
-      <article *ngSwitchCase="3" >***</article>
-      <article *ngSwitchCase="4" >****</article>
-      <article *ngSwitchCase="5" >*****</article>
+      <article *ngSwitchCase="'1'" >*</article>
+      <article *ngSwitchCase="'2'" >**</article>
+      <article *ngSwitchCase="'3'" >***</article>
+      <article *ngSwitchCase="'4'" >****</article>
+      <article *ngSwitchCase="'5'" >*****</article>
       <article *ngSwitchDefault >Not Rated Yet</article>
     </div>
+    <h2 ngNonBindable >hello there from {{ miscot }}</h2>
+    <div [class]="selectedstyle" [class.redbox]="power === '5'" [class.shadow]="show"> I am a Box </div>
+    <div [ngClass]="{'box' : true,'redbox' : power === '5', 'shadow' : show }"> I am a Box </div>
+    <div [ngClass]="['box','bluebox','shadow']"> I am a Box </div>
+    <hr>
+    <section [style.color]="'#ff0000'" [style.border]="'2px solid green'">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates fugit nihil, libero dignissimos tempore modi voluptatem culpa assumenda, dolor neque eveniet nostrum. Minus dolorem eum excepturi, illo commodi nemo eligendi.
+    </section>
+    <section [ngStyle]="{color : show ? '#f00' : '#00f', 'box-shadow' : power === '3' ? '0px 0px 10px red' : '0px 0px 10px red inset' }">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates fugit nihil, libero dignissimos tempore modi voluptatem culpa assumenda, dolor neque eveniet nostrum. Minus dolorem eum excepturi, illo commodi nemo eligendi.
+    </section>
   `,
-  styles: []
+  styles: [`
+    .box{
+      width : 200px;
+      height : 50px;
+      border : 1px dotted grey;
+      text-align : center;
+      line-height : 50px;
+      color : papayawhip;
+      font-family : arial;
+      margin : 20px;
+    }
+    .shadow{
+      box-shadow : 10px 10px 10px black;
+    }
+    .redbox{
+      background-color : crimson;
+    }
+    .bluebox{
+      background-color : blue;
+    }
+  `]
 })
 export class AppComponent {
   title = 'directives';
@@ -199,9 +230,10 @@ export class AppComponent {
     "releasedate": "11/26/2018",
     "poster": "assets/images/wonderwoman.jpg",
     "movieslist" : []
-}];
+  }];
   power:any = 0;
   additem(arg:any){
     this.list.push(arg);
   }
+  selectedstyle = "box";
 }
