@@ -51,6 +51,25 @@ import { Component } from '@angular/core';
       <span *ngIf="ev"> Even </span> 
       </article>
     </div>
+  <hr>
+  <input #pow type="range" min="0" max="5" step="1" value="power" (input)="power = pow.value">
+  Power is {{ power }} 
+  <div [ngSwitch]="power">
+      <article *ngSwitchCase="1" >Needs Rest</article>
+      <article *ngSwitchCase="2" >Recovered</article>
+      <article *ngSwitchCase="3" >Low Power</article>
+      <article *ngSwitchCase="4" >Strong</article>
+      <article *ngSwitchCase="5" >Unbeatable</article>
+      <article *ngSwitchDefault >Not Ready to Fight</article>
+    </div>
+  <div [ngSwitch]="power">
+      <article *ngSwitchCase="1" >*</article>
+      <article *ngSwitchCase="2" >**</article>
+      <article *ngSwitchCase="3" >***</article>
+      <article *ngSwitchCase="4" >****</article>
+      <article *ngSwitchCase="5" >*****</article>
+      <article *ngSwitchDefault >Not Rated Yet</article>
+    </div>
   `,
   styles: []
 })
@@ -181,7 +200,7 @@ export class AppComponent {
     "poster": "assets/images/wonderwoman.jpg",
     "movieslist" : []
 }];
-  power:any = 1;
+  power:any = 0;
   additem(arg:any){
     this.list.push(arg);
   }
