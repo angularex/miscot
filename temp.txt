@@ -1,0 +1,188 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <h1>Directives</h1>
+    <ng-template [ngIf]="show">
+      <button>button 1</button>
+      <button>button 2</button>
+      <button>button 3</button>
+      <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. In nostrum optio, voluptatibus, similique eos voluptas numquam, neque ipsum obcaecati nisi amet, quis molestiae perspiciatis reprehenderit dolorum magnam aliquam! Quos, omnis.
+      </p>
+    </ng-template>
+    <hr>
+    Show Terms : 
+    <input (change)="show = !show" [value]="show" type="checkbox">
+    {{ show }}
+    <div *ngIf="show" style="border : 2px solid red; padding : 10px">
+      <h2>Terms and Conditions</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quos nam quae voluptatum iusto, minus, aperiam inventore in sequi, repellendus ex reprehenderit delectus minima odio earum accusantium animi incidunt magnam.
+        Cupiditate laborum obcaecati culpa consequuntur nulla reprehenderit neque, incidunt doloremque dolores dignissimos? Obcaecati, tenetur quisquam. Fugit, iusto perspiciatis, ullam soluta repellat, sit dolore quasi accusantium cupiditate et dolorem dolores exercitationem.
+        Earum reprehenderit doloremque praesentium facere ea et dicta dignissimos libero incidunt perspiciatis, sunt a dolore deserunt eum eaque ratione nobis voluptatum temporibus perferendis voluptas ex pariatur nihil. Velit, numquam hic.
+        Recusandae quos odit in architecto et excepturi impedit enim neque aliquid optio dignissimos quisquam nam, dolore officiis! Ipsa, sit minima fugit quibusdam placeat, architecto, corrupti tempore voluptatem corporis quae dolor?
+        Tenetur, cum. Optio hic eligendi distinctio ea accusantium cupiditate aperiam, commodi blanditiis sunt officiis quidem impedit voluptatem sit cumque, facilis eos officia sequi inventore? Nemo aut odit iusto similique in.
+      </p>
+    </div>
+    <hr>
+    <input #ip type="text">
+    <button (click)="additem(ip.value)">Add New Item</button>
+    <div>{{ list }}</div>
+    <ul>
+      <li>{{ list[0] }}</li>
+      <li>{{ list[1] }}</li>
+      <li>{{ list[2] }}</li>
+      <li>{{ list[3] }}</li>
+    </ul>
+    <ol>
+      <li *ngFor="let info of list">{{ info }}</li>
+    </ol>
+    <div>
+      <article *ngFor="let hero of herolist; index as idx; first as fst; last as lst; odd as od; even as ev">
+      {{ idx + 1 }} 
+      - 
+      {{ hero.title }}
+      <span *ngIf="fst"> First </span> 
+      <span *ngIf="!fst && !lst"> In Between </span> 
+      <span *ngIf="lst"> Last </span> 
+      <span *ngIf="od"> Odd </span> 
+      <span *ngIf="ev"> Even </span> 
+      </article>
+    </div>
+  `,
+  styles: []
+})
+export class AppComponent {
+  title = 'directives';
+  show:boolean = false;
+  list = ['item 1', 'item 2', 'item 3', 'item 4'];
+  herolist = [{
+    "sl": 1,
+    "title": "Batman",
+    "gender": "male",
+    "firstname": "Bruce",
+    "lastname": "Wayne",
+    "city": "Gotham",
+    "ticketprice": 123.4567,
+    "releasedate": "1/26/2018",
+    "poster": "assets/images/batman.jpg",
+    "movieslist": [
+        {
+            "title": "Batman Begins",
+            "poster": "assets/images/bat1_tn.jpg"
+        }, {
+            "title": "Dark Knight",
+            "poster": "assets/images/bat2_tn.jpg"
+        }, {
+            "title": "Dark Knight Raises",
+            "poster": "assets/images/bat3_tn.jpg"
+        }
+    ]
+
+},
+{
+    "sl": 2,
+    "title": "Superman",
+    "gender": "male",
+    "firstname": "Clark",
+    "lastname": "Kent",
+    "city": "Metropolis",
+    "ticketprice": 178.6789,
+    "releasedate": "1/27/2018",
+    "poster": "assets/images/superman.jpg",
+    "movieslist": [
+        {
+            "title": "Superman The Movie",
+            "poster": "assets/images/super1_tn.jpg"
+        }, {
+            "title": "Superman Returns",
+            "poster": "assets/images/super2_tn.jpg"
+        }, {
+            "title": "Superman Man of Steel",
+            "poster": "assets/images/super3_tn.jpg"
+        }
+    ]
+
+},
+{
+    "sl": 3,
+    "title": "Ironman",
+    "gender": "male",
+    "firstname": "Tony",
+    "lastname": "Stark",
+    "city": "New York",
+    "ticketprice": 122,
+    "releasedate": "1/27/2018",
+    "poster": "assets/images/ironman.jpg",
+    "movieslist": [
+        {
+            "title": "Ironman",
+            "poster": "assets/images/iron1_tn.jpg"
+        }, {
+            "title": "Ironman 2",
+            "poster": "assets/images/iron2_tn.jpg"
+        }, {
+            "title": "Ironman 3",
+            "poster": "assets/images/iron3_tn.jpg"
+        }
+    ]
+
+}, {
+    "sl": 4,
+    "title": "Phantom",
+    "gender": "male",
+    "firstname": "Kit",
+    "lastname": "Walker",
+    "city": "Bhangala",
+    "ticketprice": 98.6456,
+    "releasedate": "1/27/2018",
+    "poster": "assets/images/phantom.jpg",
+    "movieslist": [
+        {
+            "title": "The Phantom Slam Evilz",
+            "poster": "assets/images/phantom1_tn.jpg"
+        }
+    ]
+
+}, {
+    "sl": 5,
+    "title": "Spiderman",
+    "gender": "male",
+    "firstname": "Peter",
+    "lastname": "Parker",
+    "city": "New York",
+    "ticketprice": 1.3456,
+    "releasedate": "9/26/2018",
+    "poster": "assets/images/spiderman.jpg",
+    "movieslist": [
+        {
+            "title": "Spiderman",
+            "poster": "assets/images/spider1_tn.jpg"
+        }, {
+            "title": "Spiderman 2",
+            "poster": "assets/images/spider2_tn.jpg"
+        }, {
+            "title": "Spiderman 3",
+            "poster": "assets/images/spider3_tn.jpg"
+        }
+    ]
+},
+{
+    "sl": 6,
+    "title": "Wonder Women",
+    "gender": "female",
+    "firstname": "Princess",
+    "lastname": "Diana",
+    "city": "Amazon",
+    "ticketprice": 341.3456978978,
+    "releasedate": "11/26/2018",
+    "poster": "assets/images/wonderwoman.jpg",
+    "movieslist" : []
+}];
+  power:any = 1;
+  additem(arg:any){
+    this.list.push(arg);
+  }
+}
