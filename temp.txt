@@ -28,12 +28,14 @@ import { Component } from '@angular/core';
       <tbody>
         <tr *ngFor="let hero of herolist">
           <td>{{ hero.sl }}</td>
-          <td>{{ hero.title }}</td>
-          <td>{{ hero.firstname+" "+hero.lastname}}</td>
-          <td>{{ hero.poster }}</td>
+          <td>{{ hero.title | uppercase }}</td>
+          <td>{{ hero.firstname+" "+hero.lastname | uppercase | lowercase | titlecase }}</td>
+          <td>
+            <img width="50" [src]="hero.poster" [alt]="hero.title">
+          </td>
           <td>{{ hero.city }}</td>
-          <td>{{ hero.releasedate }}</td>
-          <td>{{ hero.ticketprice }}</td>
+          <td>{{ hero.releasedate | date:'dd-MMM-yyyy' }}</td>
+          <td>{{ hero.ticketprice | currency:'INR':'symbol':'4.2-4' }}</td>
           <td>{{ hero.movieslist.length }}</td>
         </tr>
       </tbody>
