@@ -1,113 +1,17 @@
 import { Component } from '@angular/core';
-
+// import {data} from "./data";
 @Component({
   selector: 'app-root',
   template: `
-    <h1>Directives</h1>
-    <ng-template [ngIf]="show">
-      <button>button 1</button>
-      <button>button 2</button>
-      <button>button 3</button>
-      <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. In nostrum optio, voluptatibus, similique eos voluptas numquam, neque ipsum obcaecati nisi amet, quis molestiae perspiciatis reprehenderit dolorum magnam aliquam! Quos, omnis.
-      </p>
-    </ng-template>
+    <h1>Pipes in Angular</h1>
     <hr>
-    Show Terms : 
-    <input (change)="show = !show" [value]="show" type="checkbox">
-    {{ show }}
-    <div *ngIf="show" style="border : 2px solid red; padding : 10px">
-      <h2>Terms and Conditions</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quos nam quae voluptatum iusto, minus, aperiam inventore in sequi, repellendus ex reprehenderit delectus minima odio earum accusantium animi incidunt magnam.
-        Cupiditate laborum obcaecati culpa consequuntur nulla reprehenderit neque, incidunt doloremque dolores dignissimos? Obcaecati, tenetur quisquam. Fugit, iusto perspiciatis, ullam soluta repellat, sit dolore quasi accusantium cupiditate et dolorem dolores exercitationem.
-        Earum reprehenderit doloremque praesentium facere ea et dicta dignissimos libero incidunt perspiciatis, sunt a dolore deserunt eum eaque ratione nobis voluptatum temporibus perferendis voluptas ex pariatur nihil. Velit, numquam hic.
-        Recusandae quos odit in architecto et excepturi impedit enim neque aliquid optio dignissimos quisquam nam, dolore officiis! Ipsa, sit minima fugit quibusdam placeat, architecto, corrupti tempore voluptatem corporis quae dolor?
-        Tenetur, cum. Optio hic eligendi distinctio ea accusantium cupiditate aperiam, commodi blanditiis sunt officiis quidem impedit voluptatem sit cumque, facilis eos officia sequi inventore? Nemo aut odit iusto similique in.
-      </p>
-    </div>
-    <hr>
-    <input #ip type="text">
-    <button (click)="additem(ip.value)">Add New Item</button>
-    <div>{{ list }}</div>
     <ul>
-      <li>{{ list[0] }}</li>
-      <li>{{ list[1] }}</li>
-      <li>{{ list[2] }}</li>
-      <li>{{ list[3] }}</li>
+      <li *ngFor="let hero of herolist">{{ hero.title }}</li>
     </ul>
-    <ol>
-      <li *ngFor="let info of list">{{ info }}</li>
-    </ol>
-    <div>
-      <article *ngFor="let hero of herolist; index as idx; first as fst; last as lst; odd as od; even as ev">
-      {{ idx + 1 }} 
-      - 
-      {{ hero.title }}
-      <span *ngIf="fst"> First </span> 
-      <span *ngIf="!fst && !lst"> In Between </span> 
-      <span *ngIf="lst"> Last </span> 
-      <span *ngIf="od"> Odd </span> 
-      <span *ngIf="ev"> Even </span> 
-      </article>
-    </div>
-  <hr>
-  <input #pow type="range" min="0" max="5" step="1" value="power" (input)="power = pow.value">
-  Power is {{ power }} 
-  <div [ngSwitch]="power">
-      <article *ngSwitchCase="'1'" >Needs Rest</article>
-      <article *ngSwitchCase="'2'" >Recovered</article>
-      <article *ngSwitchCase="'3'" >Low Power</article>
-      <article *ngSwitchCase="'4'" >Strong</article>
-      <article *ngSwitchCase="'5'" >Unbeatable</article>
-      <article *ngSwitchDefault >Not Ready to Fight</article>
-    </div>
-  <div [ngSwitch]="power">
-      <article *ngSwitchCase="'1'" >*</article>
-      <article *ngSwitchCase="'2'" >**</article>
-      <article *ngSwitchCase="'3'" >***</article>
-      <article *ngSwitchCase="'4'" >****</article>
-      <article *ngSwitchCase="'5'" >*****</article>
-      <article *ngSwitchDefault >Not Rated Yet</article>
-    </div>
-    <h2 ngNonBindable >hello there from {{ miscot }}</h2>
-    <div [class]="selectedstyle" [class.redbox]="power === '5'" [class.shadow]="show"> I am a Box </div>
-    <div [ngClass]="{'box' : true,'redbox' : power === '5', 'shadow' : show }"> I am a Box </div>
-    <div [ngClass]="['box','bluebox','shadow']"> I am a Box </div>
-    <hr>
-    <section [style.color]="'#ff0000'" [style.border]="'2px solid green'">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates fugit nihil, libero dignissimos tempore modi voluptatem culpa assumenda, dolor neque eveniet nostrum. Minus dolorem eum excepturi, illo commodi nemo eligendi.
-    </section>
-    <section [ngStyle]="{color : show ? '#f00' : '#00f', 'box-shadow' : power === '3' ? '0px 0px 10px red' : '0px 0px 10px red inset' }">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates fugit nihil, libero dignissimos tempore modi voluptatem culpa assumenda, dolor neque eveniet nostrum. Minus dolorem eum excepturi, illo commodi nemo eligendi.
-    </section>
-  `,
-  styles: [`
-    .box{
-      width : 200px;
-      height : 50px;
-      border : 1px dotted grey;
-      text-align : center;
-      line-height : 50px;
-      color : papayawhip;
-      font-family : arial;
-      margin : 20px;
-    }
-    .shadow{
-      box-shadow : 10px 10px 10px black;
-    }
-    .redbox{
-      background-color : crimson;
-    }
-    .bluebox{
-      background-color : blue;
-    }
-  `]
+  `
 })
 export class AppComponent {
-  title = 'directives';
-  show:boolean = false;
-  list = ['item 1', 'item 2', 'item 3', 'item 4'];
+  title = 'pipes';
   herolist = [{
     "sl": 1,
     "title": "Batman",
@@ -230,10 +134,5 @@ export class AppComponent {
     "releasedate": "11/26/2018",
     "poster": "assets/images/wonderwoman.jpg",
     "movieslist" : []
-  }];
-  power:any = 0;
-  additem(arg:any){
-    this.list.push(arg);
-  }
-  selectedstyle = "box";
+}];
 }
