@@ -36,7 +36,11 @@ import { Component } from '@angular/core';
           <td>{{ hero.city }}</td>
           <td>{{ hero.releasedate | date:'dd-MMM-yyyy' }}</td>
           <td>{{ hero.ticketprice | currency:'INR':'symbol':'4.2-4' }}</td>
-          <td>{{ hero.movieslist.length }}</td>
+          <td>
+             <div style="float:left; padding: 5px; border : 1px solid grey; margin : 2px" *ngFor="let movie of hero.movieslist" >
+                 <img width="50" [src]="movie.poster" [alt]="movie.title">     
+             </div>
+          </td>
         </tr>
       </tbody>
     </table>
