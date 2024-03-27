@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-// import {data} from "./data";
 @Component({
   selector: 'app-root',
   template: `
   <div class="container">
-    <h1>Pipes in Angular</h1>
-    <hr>
-    <ul class="nav">
-      <li class="nav-item" *ngFor="let hero of herolist">
-        <a class="nav-link" href="#">{{ hero.title }}</a>
-      </li>
-    </ul>
+    <h1>Data in Angular</h1>
+   <div style="border : 1px solid grey; padding : 10px">
+       <ul class="nav">
+           <li class="nav-item" *ngFor="let hero of herolist">
+               <a class="nav-link" href="#">{{ hero.title }}</a>
+           </li>
+       </ul>
+   </div>
     <hr>
     <table class="table">
       <thead class="table-dark">
