@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-reactive-form',
+  selector: 'app-reactive-builder-form',
   template: `
-    <h2>Reactive Forms in Angular with Form Control</h2>
+    <h2>Reactive Forms in Angular with Form Builder</h2>
     <form action="#" name="myform" [formGroup]="userForm">
       <div class="mb-3">
         <label for="uname" class="form-label">Name</label>
@@ -68,19 +68,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   } */
   `]
 })
-export class ReactiveFormComponent {
+export class ReactiveFormBuilderComponent {
   userForm:any;
+  constructor(private fb:FormBuilder){
+    // empty
+  }
   ngOnInit(){
-    this.userForm = new FormGroup({
-        username : new FormControl('', {
-            validators : Validators.required
-        }),
-        usermail : new FormControl('', {
-            validators : [Validators.required, Validators.pattern('.+@.+')]
-        }),
-        userage : new FormControl('', {
-            validators : [Validators.required, Validators.min(18), Validators.max(80) ]
-        })
+    this.userForm = this.fb.group({
+        username : ['', Validators.required],
+        usermail : ['',[Validators.required, Validators.pattern('.+@.+')]],
+        userage : ['',[Validators.required, Validators.min(18), Validators.max(80) ]]
     })
   }
   clickHandler(){
