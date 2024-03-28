@@ -4,21 +4,24 @@ import { Component } from '@angular/core';
   selector: 'app-template-form',
   template: `
     <h2>Template Driven Forms in Angular</h2>
-    <form action="#" method="get" name="myform" (submit)="submitHandler($event)">
+    <form action="#" #myform="ngForm" method="get" name="myform" (submit)="submitHandler($event, myform)">
       <div class="mb-3">
         <label for="uname" class="form-label">Name</label>
         <input #un="ngModel" [(ngModel)]="username" required name="username" class="form-control" id="uname">
+        <span *ngIf="un.touched && un.invalid" style="color : red">User Name field is required please fill your name</span>
       </div>
       <div class="mb-3">
         <label for="uemail" class="form-label">eMail</label>
         <input #um="ngModel" [(ngModel)]="usermail" pattern=".+@.+" required name="usermail" class="form-control" id="uemail">
-      </div>
+        <span *ngIf="um.touched && um.invalid" style="color : red">User eMail field is required please fill your email id</span>
+        </div>
       <div class="mb-3">
         <label for="uage" class="form-label">Age</label>
         <input type="number" #ua="ngModel" [(ngModel)]="userage" min="18" max="90" step="1" required name="userage" class="form-control" id="uage">
-      </div>
+        <span *ngIf="ua.touched && ua.invalid" style="color : red">User Age field is required please fill your age</span>
+        </div>
       <div class="mb-3">
-        <button class="btn btn-primary">Submit Form Data</button>
+        <button [disabled]="myform.invalid" class="btn btn-primary">Submit Form Data</button>
       </div>
     </form>
     <hr>
@@ -53,15 +56,29 @@ import { Component } from '@angular/core';
     </ul>
 
   `,
-  styles: [
-  ]
+  styles: [`
+  input.ng-touched.ng-invalid{
+      border : 2px solid crimson;
+  }
+  input.ng-touched.ng-valid{
+      border : 2px solid darkseagreen;
+  }
+  `]
 })
 export class TemplateFormComponent {
   username = "";
   usermail = "";
   userage = "";
-  submitHandler(evt:any){
+  submitHandler(evt:any, formdata:any){
     evt.preventDefault();
     // console.log(evt);
+    // console.log(formdata)
+     if(formdata.form.value.userage < 18){
+        alert("you are too young to join us")
+      }else if(formdata.form.value.userage > 80){
+       alert("you are too old to join us")
+     }else{
+        evt.target.submit();
+     }
   }
 }
