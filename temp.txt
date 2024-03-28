@@ -7,27 +7,61 @@ import { Component } from '@angular/core';
     <form action="#" method="get" name="myform" (submit)="submitHandler($event)">
       <div class="mb-3">
         <label for="uname" class="form-label">Name</label>
-        <input name="username" class="form-control" id="uname">
+        <input #un="ngModel" [(ngModel)]="username" required name="username" class="form-control" id="uname">
       </div>
       <div class="mb-3">
         <label for="uemail" class="form-label">eMail</label>
-        <input name="usermail" class="form-control" id="uemail">
+        <input #um="ngModel" [(ngModel)]="usermail" pattern=".+@.+" required name="usermail" class="form-control" id="uemail">
       </div>
       <div class="mb-3">
         <label for="uage" class="form-label">Age</label>
-        <input name="userage" class="form-control" id="uage">
+        <input type="number" #ua="ngModel" [(ngModel)]="userage" min="18" max="90" step="1" required name="userage" class="form-control" id="uage">
       </div>
       <div class="mb-3">
         <button class="btn btn-primary">Submit Form Data</button>
       </div>
     </form>
+    <hr>
+    <ul>
+      <li>User Name : {{ username }}</li>
+      <li>User Mail : {{ usermail }}</li>
+      <li>User Age : {{ userage }}</li>
+    </ul>
+    <ul>
+      <li *ngIf="un.untouched" >User Name is Untouched</li>
+      <li *ngIf="un.touched" >User Name is Touched</li>
+      <li *ngIf="un.pristine" >User Name is Pristine</li>
+      <li *ngIf="un.dirty" >User Name is Dirty</li>
+      <li *ngIf="un.valid" >User Name is Valid</li>
+      <li *ngIf="un.invalid" >User Name is InValid</li>
+    </ul>
+    <ul>
+      <li *ngIf="um.untouched">User Mail is Untouched</li>
+      <li *ngIf="um.touched">User Mail is Touched</li>
+      <li *ngIf="um.pristine">User Mail is Pristine</li>
+      <li *ngIf="um.dirty">User Mail is Dirty</li>
+      <li *ngIf="um.valid">User Mail is Valid</li>
+      <li *ngIf="um.invalid">User Mail is InValid</li>
+    </ul>
+    <ul>
+      <li *ngIf="ua.untouched">User Age is Untouched</li>
+      <li *ngIf="ua.touched">User Age is Touched</li>
+      <li *ngIf="ua.pristine">User Age is Pristine</li>
+      <li *ngIf="ua.dirty">User Age is Dirty</li>
+      <li *ngIf="ua.valid">User Age is Valid</li>
+      <li *ngIf="ua.invalid">User Age is InValid</li>
+    </ul>
+
   `,
   styles: [
   ]
 })
 export class TemplateFormComponent {
+  username = "";
+  usermail = "";
+  userage = "";
   submitHandler(evt:any){
     evt.preventDefault();
-    console.log(evt);
+    // console.log(evt);
   }
 }
