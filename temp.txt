@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
       </div>
       <div class="mb-3">
         <label for="uemail" class="form-label">eMail</label>
-        <input #um="ngModel" [(ngModel)]="usermail" pattern=".+@.+" required name="usermail" class="form-control" id="uemail">
+        <input type="text" #um="ngModel" [(ngModel)]="usermail" pattern=".+@.+" required name="usermail" class="form-control" id="uemail">
         <span *ngIf="um.touched && um.invalid" style="color : red">User eMail field is required please fill your email id</span>
         </div>
       <div class="mb-3">
@@ -21,7 +21,7 @@ import { Component } from '@angular/core';
         <span *ngIf="ua.touched && ua.invalid" style="color : red">User Age field is required please fill your age</span>
         </div>
       <div class="mb-3">
-        <button [disabled]="myform.invalid" class="btn btn-primary">Submit Form Data</button>
+        <button [disabled]="myform.invalid"  class="btn btn-primary">Submit Form Data</button>
       </div>
     </form>
     <hr>
@@ -71,14 +71,28 @@ export class TemplateFormComponent {
   userage = "";
   submitHandler(evt:any, formdata:any){
     evt.preventDefault();
+
+    // var regex = new RegExp("^\S+@\S+\.\S+$");
+    // console.log(regex.test(formdata.form.value.usermail));
     // console.log(evt);
     // console.log(formdata)
-     if(formdata.form.value.userage < 18){
+    // console.log(this.usermail)
+     /* if(formdata.form.value.userage < 18){
         alert("you are too young to join us")
       }else if(formdata.form.value.userage > 80){
        alert("you are too old to join us")
      }else{
         evt.target.submit();
-     }
+     } */
   }
 }
+
+
+/* 
+.+@.+
+
+.+@.+.\.+ 
+
+\S+@\S+\.\S+
+
+*/
