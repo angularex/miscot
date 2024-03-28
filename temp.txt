@@ -1,103 +1,33 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { ChildComponent } from './child.component';
-import { FormsModule } from '@angular/forms';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    ChildComponent
-  ],
-  imports: [
-    BrowserModule, FormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-template-form',
   template: `
-    <h1 [innerText]="title"></h1>
-    <input type="number" [(ngModel)]="appPower">
-    <input [(ngModel)]="show" type="checkbox">
-    <hr>
-    <app-child *ngIf="show" [power]="appPower"></app-child>
-  `,
-  styles: []
-})
-export class AppComponent {
-  title = 'Lifecycle of a component';
-  appPower = 1;
-  show = true;
-  constructor(){
-    console.log("AppComponent's constructor was called")
-  }
-  ngOnInit(){
-    console.log("AppComponent's ngOnInit was called")
-  }
-}
-
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-
-@Component({
-  selector: 'app-child',
-  template: `
-    <h2>Child Component</h2>
-    <h3>Power is : {{ power }}</h3>
+    <h2>Template Driven Forms in Angular</h2>
+    <form action="#" method="get" name="myform" (submit)="submitHandler($event)">
+      <div class="mb-3">
+        <label for="uname" class="form-label">Name</label>
+        <input name="username" class="form-control" id="uname">
+      </div>
+      <div class="mb-3">
+        <label for="uemail" class="form-label">eMail</label>
+        <input name="usermail" class="form-control" id="uemail">
+      </div>
+      <div class="mb-3">
+        <label for="uage" class="form-label">Age</label>
+        <input name="userage" class="form-control" id="uage">
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary">Submit Form Data</button>
+      </div>
+    </form>
   `,
   styles: [
   ]
 })
-export class ChildComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewChecked, AfterViewInit, OnDestroy {
-// properties
-@Input()power = 0;
-
-// constructor
-  constructor(){
-    console.log("ChildComponent's constructor was called")
-  }
-// methods events
-  ngOnInit(){
-    console.log("ChildComponent's ngOnInit was called")
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("ChildComponent's ngOnChanges was called", changes);
-    /* 
-    if(changes['power'].currentValue >= 15){
-      this.power = 9;
-      console.log(changes['power'].currentValue)
-    } 
-    */
-  }
-  ngDoCheck(): void {
-    console.log("ChildComponent's ngDoCheck was called");
-  }
-  ngAfterContentChecked(): void {
-    console.log("ChildComponent's ngAfterContentChecked was called")
-  }
-  ngAfterContentInit(): void {
-    console.log("ChildComponent's ngAfterContentInit was called")
-  }
-  ngAfterViewChecked(): void {
-    console.log("ChildComponent's ngAfterViewChecked was called")
-  }
-  ngAfterViewInit(): void {
-    console.log("ChildComponent's ngAfterViewInit was called")
-  }
-  ngOnDestroy(): void {
-    console.log("ChildComponent's ngOnDestroy was called")
+export class TemplateFormComponent {
+  submitHandler(evt:any){
+    evt.preventDefault();
+    console.log(evt);
   }
 }
-
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
