@@ -1,98 +1,108 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-template-form',
+  selector: 'app-reactive-form',
   template: `
-    <h2>Template Driven Forms in Angular</h2>
-    <form action="#" #myform="ngForm" method="get" name="myform" (submit)="submitHandler($event, myform)">
+    <h2>Reactive Forms in Angular with Form Control</h2>
+    <form action="#" name="myform" [formGroup]="userForm">
       <div class="mb-3">
         <label for="uname" class="form-label">Name</label>
-        <input #un="ngModel" [(ngModel)]="username" required name="username" class="form-control" id="uname">
-        <span *ngIf="un.touched && un.invalid" style="color : red">User Name field is required please fill your name</span>
+        <input class="form-control" formControlName="username" id="uname">
+        <span *ngIf="userForm.get('username').invalid && userForm.get('username').touched" style="color : red">User Name field is required please fill your name</span>
       </div>
       <div class="mb-3">
         <label for="uemail" class="form-label">eMail</label>
-        <input type="text" #um="ngModel" [(ngModel)]="usermail" pattern=".+@.+" required name="usermail" class="form-control" id="uemail">
-        <span *ngIf="um.touched && um.invalid" style="color : red">User eMail field is required please fill your email id</span>
+        <input class="form-control"  formControlName="usermail" id="uemail">
+        <span *ngIf="userForm.get('usermail').invalid && userForm.get('usermail').touched" style="color : red">User eMail field is required please fill your email id</span>
         </div>
       <div class="mb-3">
         <label for="uage" class="form-label">Age</label>
-        <input type="number" #ua="ngModel" [(ngModel)]="userage" min="18" max="90" step="1" required name="userage" class="form-control" id="uage">
-        <span *ngIf="ua.touched && ua.invalid" style="color : red">User Age field is required please fill your age</span>
+        <input class="form-control"  formControlName="userage" id="uage">
+        <span *ngIf="userForm.get('userage').invalid && userForm.get('userage').touched" style="color : red">User Age field is required please fill your age</span>
         </div>
       <div class="mb-3">
-        <button [disabled]="myform.invalid"  class="btn btn-primary">Submit Form Data</button>
+        <button [disabled]="userForm.invalid" (click)="clickHandler()"  class="btn btn-primary">Submit Form Data</button>
       </div>
     </form>
+    <button class="btn btn-info" (click)="fillPartialData()">Fill User Name</button>
+    <button class="btn btn-secondary" (click)="fillFullData()">Fill User Data</button>
     <hr>
     <ul>
-      <li>User Name : {{ username }}</li>
-      <li>User Mail : {{ usermail }}</li>
-      <li>User Age : {{ userage }}</li>
+      <li>User Name : {{ userForm.get("username").value }}</li>
+      <li>User Mail : {{ userForm.get("usermail").value }}</li>
+      <li>User Age : {{ userForm.get("userage").value }}</li>
     </ul>
     <ul>
-      <li *ngIf="un.untouched" >User Name is Untouched</li>
-      <li *ngIf="un.touched" >User Name is Touched</li>
-      <li *ngIf="un.pristine" >User Name is Pristine</li>
-      <li *ngIf="un.dirty" >User Name is Dirty</li>
-      <li *ngIf="un.valid" >User Name is Valid</li>
-      <li *ngIf="un.invalid" >User Name is InValid</li>
+      <li *ngIf="userForm.get('username').untouched" >User Name is Untouched</li>
+      <li *ngIf="userForm.get('username').touched" >User Name is Touched</li>
+      <li *ngIf="userForm.get('username').pristine" >User Name is Pristine</li>
+      <li *ngIf="userForm.get('username').dirty" >User Name is Dirty</li>
+      <li *ngIf="userForm.get('username').valid" >User Name is Valid</li>
+      <li *ngIf="userForm.get('username').invalid" >User Name is InValid</li>
     </ul>
     <ul>
-      <li *ngIf="um.untouched">User Mail is Untouched</li>
-      <li *ngIf="um.touched">User Mail is Touched</li>
-      <li *ngIf="um.pristine">User Mail is Pristine</li>
-      <li *ngIf="um.dirty">User Mail is Dirty</li>
-      <li *ngIf="um.valid">User Mail is Valid</li>
-      <li *ngIf="um.invalid">User Mail is InValid</li>
+      <li *ngIf="userForm.get('usermail').untouched">User Mail is Untouched</li>
+      <li *ngIf="userForm.get('usermail').touched">User Mail is Touched</li>
+      <li *ngIf="userForm.get('usermail').pristine">User Mail is Pristine</li>
+      <li *ngIf="userForm.get('usermail').dirty">User Mail is Dirty</li>
+      <li *ngIf="userForm.get('usermail').valid">User Mail is Valid</li>
+      <li *ngIf="userForm.get('usermail').invalid">User Mail is InValid</li>
     </ul>
     <ul>
-      <li *ngIf="ua.untouched">User Age is Untouched</li>
-      <li *ngIf="ua.touched">User Age is Touched</li>
-      <li *ngIf="ua.pristine">User Age is Pristine</li>
-      <li *ngIf="ua.dirty">User Age is Dirty</li>
-      <li *ngIf="ua.valid">User Age is Valid</li>
-      <li *ngIf="ua.invalid">User Age is InValid</li>
+      <li *ngIf="userForm.get('userage').untouched">User Age is Untouched</li>
+      <li *ngIf="userForm.get('userage').touched">User Age is Touched</li>
+      <li *ngIf="userForm.get('userage').pristine">User Age is Pristine</li>
+      <li *ngIf="userForm.get('userage').dirty">User Age is Dirty</li>
+      <li *ngIf="userForm.get('userage').valid">User Age is Valid</li>
+      <li *ngIf="userForm.get('userage').invalid">User Age is InValid</li>
     </ul>
 
   `,
   styles: [`
-  input.ng-touched.ng-invalid{
+  /* input{
       border : 2px solid crimson;
   }
-  input.ng-touched.ng-valid{
+  input{
       border : 2px solid darkseagreen;
-  }
+  } */
   `]
 })
-export class TemplateFormComponent {
-  username = "";
-  usermail = "";
-  userage = "";
-  submitHandler(evt:any, formdata:any){
-    evt.preventDefault();
+export class ReactiveFormComponent {
+  userForm:any;
+  ngOnInit(){
+    this.userForm = new FormGroup({
+        username : new FormControl('', {
+            validators : Validators.required
+        }),
+        usermail : new FormControl('', {
+            validators : [Validators.required, Validators.pattern('.+@.+')]
+        }),
+        userage : new FormControl('', {
+            validators : [Validators.required, Validators.min(18), Validators.max(80) ]
+        })
+    })
+  }
+  clickHandler(){
+    if(this.userForm.get('userage').value < 18){
+        alert("you are too young to join us");
+    }else if(this.userForm.get('userage').value > 80){
+        alert("you are too old to join us");
+    }else{
+        alert("you are welcome");
+    }
+  }
 
-    // var regex = new RegExp("^\S+@\S+\.\S+$");
-    // console.log(regex.test(formdata.form.value.usermail));
-    // console.log(evt);
-    // console.log(formdata)
-    // console.log(this.usermail)
-     /* if(formdata.form.value.userage < 18){
-        alert("you are too young to join us")
-      }else if(formdata.form.value.userage > 80){
-       alert("you are too old to join us")
-     }else{
-        evt.target.submit();
-     } */
+  fillPartialData(){
+    this.userForm.patchValue({
+        username : "Bruce"
+    })
+  }
+  fillFullData(){
+    this.userForm.setValue({
+        username : "Bruce",
+        usermail : "bruce@wayne.com",
+        userage : 21
+    })
   }
 }
-
-
-/* 
-.+@.+
-
-.+@.+.\.+ 
-
-\S+@\S+\.\S+
-
-*/
